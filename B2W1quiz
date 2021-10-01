@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Sep 30 17:49:55 2021
+
+@author: SamR
+"""
+import h5py
+import numpy as np
+from matplotlib import pyplot as plt
+
+
+hf = h5py.File("test_ssx_particle_trajectory.h5", 'r')
+
+#print(h5_file.keys())
+
+
+# or we can assign the data to a local variable
+t = np.array(hf['dt'])
+r = np.array(hf['r'])
+x = np.array(hf['B'])
+v = np.array(hf['v'])
+r1 = r[:,0]
+r2 = r[:,1]
+r3 = r[:,2]
+
+# close the file
+hf.close()
+
+
+#create a 3D axis object
+ax = plt.gcf().add_subplot(111, projection='3d')
+#make a plot of a trajectory given x, y, and z arrays as a function of time
+ax.plot(r1, r2, r3 )
